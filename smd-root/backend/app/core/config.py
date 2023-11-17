@@ -18,6 +18,7 @@ class CommonConfig(BaseConfig):
 
 
 class DbConfig(BaseConfig):
+    DATABASE_ENGINE: str = os.environ.get('DATABASE_ENGINE')
     DATABASE_NAME: str = os.environ.get('DATABASE_NAME')
     POSTGRES_USER: str = os.environ.get('POSTGRES_USER')
     POSTGRES_PASSWORD: str = os.environ.get('POSTGRES_PASSWORD')

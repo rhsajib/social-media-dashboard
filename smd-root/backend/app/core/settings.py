@@ -20,14 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = config.SECRET_KEY
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.DEBUG
-
 ALLOWED_HOSTS = config.ALLOWED_HOSTS
-
+ROOT_URLCONF = 'core.urls'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 # Application definition
 
@@ -51,8 +49,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'core.urls'
-WSGI_APPLICATION = 'core.wsgi.application'
 
 TEMPLATES = [
     {
@@ -72,18 +68,17 @@ TEMPLATES = [
 
 
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': config.DATABASE_ENGINE,
         'NAME': config.DATABASE_NAME,
         'USER': config.POSTGRES_USER,
         'PASSWORD': config.POSTGRES_PASSWORD,
-        'HOST': config.HOST,  # Set to your PostgreSQL server's address
-        'PORT': config.PORT,       # Default PostgreSQL port 
+        'HOST': config.HOST,  
+        'PORT': config.PORT,       
     }
 }
 

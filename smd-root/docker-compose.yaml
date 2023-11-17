@@ -1,0 +1,41 @@
+version: '3.9'
+
+# follow this
+# https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
+services:
+
+  django-app:
+    container_name: smd-django-app
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    # command: python app/manage.py runserver 0.0.0.0:8000
+    # command: gunicorn your_project_name.wsgi:application -b 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/usr/src/app/
+    env_file:
+      - ./backend/app/.env.dev
+    depends_on:
+      - postgres
+  
+  postgres:
+    image: postgres:15
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - HOST=postgres
+      - PORT=5432
+    env_file:
+      - ./backend/app/.env.dev
+        
+volumes:
+  postgres_data:
+    driver: local
+
+
+      
+
