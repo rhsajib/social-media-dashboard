@@ -13,24 +13,31 @@ services:
     # command: gunicorn your_project_name.wsgi:application -b 0.0.0.0:8000
     ports:
       - "8000:8000"
+    environment:
+      - PG_SERVICE=db
+    env_file:
+      - ./backend/app/.env
     volumes:
       - ./backend:/usr/src/app/
-    env_file:
-      - ./backend/app/.env.dev
     depends_on:
-      - postgres
+      - db
   
-  postgres:
+  db:
     image: postgres:15
-    ports:
-      - "5433:5432"
+    restart: always
+    # the following environment variable should be asigned 
+    # to start the image correctly
+    # as the image requires the following 3 variables
+    # in our case, we defined it to .env file
+
+    # environment:
+    #   - POSTGRES_DB= ...
+    #   - POSTGRES_USER= ...
+    #   - POSTGRES_PASSWORD= ...
+    env_file:
+      - ./backend/app/.env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - HOST=postgres
-      - PORT=5432
-    env_file:
-      - ./backend/app/.env.dev
         
 volumes:
   postgres_data:

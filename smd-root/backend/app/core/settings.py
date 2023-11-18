@@ -74,14 +74,13 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': config.DATABASE_ENGINE,
-        'NAME': config.DATABASE_NAME,
+        'NAME': config.POSTGRES_DB,
         'USER': config.POSTGRES_USER,
         'PASSWORD': config.POSTGRES_PASSWORD,
-        'HOST': config.HOST,  
-        'PORT': config.PORT,       
+        'HOST': config.DB_HOST,            # It should be set to the service name defined in your docker-compose.yml
+        'PORT': config.DB_PORT,       
     }
 }
-
 
 
 

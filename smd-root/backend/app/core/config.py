@@ -19,11 +19,14 @@ class CommonConfig(BaseConfig):
 
 class DbConfig(BaseConfig):
     DATABASE_ENGINE: str = os.environ.get('DATABASE_ENGINE')
-    DATABASE_NAME: str = os.environ.get('DATABASE_NAME')
+    POSTGRES_DB: str = os.environ.get('POSTGRES_DB')
     POSTGRES_USER: str = os.environ.get('POSTGRES_USER')
     POSTGRES_PASSWORD: str = os.environ.get('POSTGRES_PASSWORD')
-    HOST: str = os.environ.get('HOST')
-    PORT: str = os.environ.get('PORT')
+    # DB_HOST should be set to the service name defined in your docker-compose.yml
+    # PG_IMAGE_HOST is for docker image of postgres
+    # DB_HOST: str =  os.environ.get('PG_IMAGE_HOST') if os.environ.get('PG_IMAGE_HOST') else os.environ.get('DB_HOST') 
+    DB_HOST: str =  os.environ.get('PG_SERVICE', os.environ.get('DB_HOST'))
+    DB_PORT: str = os.environ.get('PORT')
 
 class CoreConfig(DbConfig, CommonConfig):
     pass
