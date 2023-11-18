@@ -1,0 +1,22 @@
+# Ignore node_modules for React
+frontend/node_modules/
+
+# Ignore Python virtual environment for Django
+backend/venv/
+
+# Ignore compiled Python files
+backend/__pycache__/
+
+# Ignore compiled JavaScript files for React
+frontend/build/
+frontend/dist/
+
+# Ignore any local development files or directories
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+.DS_Store
+.env
