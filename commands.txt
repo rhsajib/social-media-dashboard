@@ -1,0 +1,8 @@
+cd smd-root
+
+smd-root $ docker-compose exec django-app python app/manage.py makemigrations
+smd-root $ docker-compose exec web python app/manage.py migrate
+
+
+docker ps
+docker exec -it 5217ebc95aa6 sh
